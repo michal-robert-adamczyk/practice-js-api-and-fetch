@@ -26,7 +26,26 @@ function init() {
         console.log(key);
         const URL = `https://api.weatherbit.io/v2.0/current?key=[${key}]&lat=[${latitude}]&lon=[${longitude}]`;
         console.log(URL);
+
+
+        const promise = fetch(URL);
+
+        promise
+            .then(resp => {
+                if (resp.ok) {
+                    return resp.json();
+                }
+
+                return Promise.reject(resp);
+            })
+            .then(resp => console.log(resp))
+            .catch(err => console.error(err))
+            .finally(() => {
+                console.log('Działa')
+            })
     }
+
+
 
 
 }
@@ -37,28 +56,7 @@ document.addEventListener('DOMContentLoaded', init);
 
 
 
-    // const promise = fetch('`https://api.weatherbit.io/v2.0/current?key=[key]&lat=[latitude]&lon=[longitude]`');
 
-    // promise
-    //     .then(resp => {
-    //         if (resp.ok) {
-    //             return resp.text()
-    //         }
-
-    //         return Promise.reject(resp);
-    //     })
-    //     .then(ip => {
-    //         const IPValue = ip
-    //         function AddIPIntoSpan() {
-    //             span.innerHTML = IPValue;
-    //         }
-    //         button.addEventListener('click', AddIPIntoSpan);
-
-    //     })
-    //     .catch(err => console.error(err))
-    //     .finally(() => {
-    //         console.log('Odpytywanie API zakończone!')
-    //     });
 
 
 
