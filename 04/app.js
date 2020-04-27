@@ -24,7 +24,7 @@ function init() {
         console.log(latitude);
         console.log(longitude);
         console.log(key);
-        const URL = `https://api.weatherbit.io/v2.0/current?key=[${key}]&lat=[${latitude}]&lon=[${longitude}]`;
+        const URL = `https://api.weatherbit.io/v2.0/current?key=${key}&lat=${latitude}&lon=${longitude}&lang=pl`;
         console.log(URL);
 
 
@@ -38,7 +38,7 @@ function init() {
 
                 return Promise.reject(resp);
             })
-            .then(resp => console.log(resp))
+            .then(data => console.log(data))
             .catch(err => console.error(err))
             .finally(() => {
                 console.log('Działa')
