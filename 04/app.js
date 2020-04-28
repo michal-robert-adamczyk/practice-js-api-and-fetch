@@ -20,12 +20,11 @@ function init() {
         const longitude = longitudeField.value;
 
 
+
         e.preventDefault();
-        console.log(latitude);
-        console.log(longitude);
-        console.log(key);
+
         const URL = `https://api.weatherbit.io/v2.0/current?key=${key}&lat=${latitude}&lon=${longitude}&lang=pl`;
-        console.log(URL);
+
 
 
         const promise = fetch(URL);
@@ -38,7 +37,23 @@ function init() {
 
                 return Promise.reject(resp);
             })
-            .then(data => console.log(data))
+            .then(data => {
+                const weatherDescription = data.data[0].weather.description;
+                const temperatureFahrenheit = ((data.data[0].temp) * 9 / 5) + 32;
+                console.log(temperatureFahrenheit);
+                console.log(weatherDescription);
+
+
+                const latitudeOutput = document.querySelector('.weather__lat');
+                latitudeOutput.innerText = latitude;
+
+                const longitudeOutput = document.querySelector('.weather__lng');
+                longitudeOutput.innerText = longitude;
+                const weatherSummaryOutput = document.querySelector('.weather__summary');
+                weatherSummaryOutput.innerText=weatherDescription;
+                const weatherTemperatureOutput = document.querySelector('.weather__temperature');
+                weatherTemperatureOutput.innerText = temperatureFahrenheit;
+            })
             .catch(err => console.error(err))
             .finally(() => {
                 console.log('Działa')
